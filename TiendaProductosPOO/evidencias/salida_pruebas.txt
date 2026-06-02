@@ -1,0 +1,31 @@
+===== DEMO DE PRUEBAS - TIENDA DE PRODUCTOS =====
+Integrantes: Martin Aimacana y Alex Palma
+
+CP1: Validacion de registro con campos vacios
+Resultado esperado: El campo 'nombre' es obligatorio.
+
+CP2: Registro correcto de producto perecedero
+Producto registrado: ID:2 | Leche | Tipo:Perecedero (vence: 2026-06-11) | Cant:20 | PC:$0.70 | PV:$1.00 | Stock min:5
+
+CP3: Listado y valor total del inventario
+ID:2 | Leche | Tipo:Perecedero (vence: 2026-06-11) | Cant:20 | PC:$0.70 | PV:$1.00 | Stock min:5
+Valor total: $14.00
+
+CP4: Compra de producto
+Compra registrada. Stock actual: 30
+Presupuesto disponible: $493.00
+
+CP5: Venta con control de stock insuficiente
+Resultado esperado: Stock insuficiente. Disponible: 30
+
+CP6: Actualizacion de producto
+Producto actualizado: ID:2 | Leche entera | Tipo:Perecedero (vence: 2026-06-11) | Cant:30 | PC:$0.72 | PV:$1.10 | Stock min:8
+
+CP7: Eliminacion de producto
+Producto eliminado correctamente: Arroz
+
+CP8: Alertas de bajo stock y vencimiento
+Bajo stock:
+ID:4 | Yogurt | Tipo:Perecedero (vence: 2026-05-31) | Cant:3 | PC:$0.60 | PV:$0.90 | Stock min:5
+Vencidos:
+ID:4 | Yogurt | Tipo:Perecedero (vence: 2026-05-31) | Cant:3 | PC:$0.60 | PV:$0.90 | Stock min:5

@@ -1,0 +1,58 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.4", nodesep="0.9", ranksep="0.9", splines=true];
+  node [shape=plain, fontname="DejaVu Sans"];
+  edge [fontname="DejaVu Sans", fontsize=12, color="black"];
+
+  Producto [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#E8F0FE"><B>&lt;&lt;abstract&gt;&gt; Producto</B></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: int<BR/>- nombre: String<BR/>- cantidad: int<BR/>- precioCompra: double<BR/>- precioVenta: double<BR/>- stockMinimo: int<BR/>- espacioUnidad: double<BR/>- fechaRegistro: LocalDate</TD></TR>
+      <TR><TD ALIGN="LEFT">+ aumentarStock(unidades): void<BR/>+ disminuirStock(unidades): boolean<BR/>+ calcularValorInventario(): double<BR/>+ estaVencido(): boolean<BR/>+ getTipo(): String</TD></TR>
+    </TABLE>
+  >];
+
+  ProductoPerecedero [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#EEF7EE"><B>ProductoPerecedero</B></TD></TR>
+      <TR><TD ALIGN="LEFT">- fechaVencimiento: LocalDate</TD></TR>
+      <TR><TD ALIGN="LEFT">+ estaVencido(): boolean<BR/>+ getTipo(): String</TD></TR>
+    </TABLE>
+  >];
+
+  ProductoNoPerecedero [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#EEF7EE"><B>ProductoNoPerecedero</B></TD></TR>
+      <TR><TD ALIGN="LEFT">- categoria: String</TD></TR>
+      <TR><TD ALIGN="LEFT">+ estaVencido(): boolean<BR/>+ getTipo(): String</TD></TR>
+    </TABLE>
+  >];
+
+  Inventario [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#FFF4E5"><B>Inventario</B></TD></TR>
+      <TR><TD ALIGN="LEFT">- productos: Map&lt;Integer, Producto&gt;<BR/>- presupuestoDisponible: double<BR/>- capacidadBodega: double<BR/>- siguienteId: int</TD></TR>
+      <TR><TD ALIGN="LEFT">+ registrarProducto(producto): void<BR/>+ listarProductos(): List&lt;Producto&gt;<BR/>+ actualizarProducto(...): void<BR/>+ eliminarProducto(id): void<BR/>+ comprarProducto(id, unidades): void<BR/>+ venderProducto(id, unidades): void</TD></TR>
+    </TABLE>
+  >];
+
+  Validador [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#FFF4E5"><B>Validador</B></TD></TR>
+      <TR><TD ALIGN="LEFT">+ validarTexto(valor, campo): void<BR/>+ validarEnteroPositivo(valor, campo): void<BR/>+ validarPrecio(valor, campo): void</TD></TR>
+    </TABLE>
+  >];
+
+  Main [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8">
+      <TR><TD BGCOLOR="#FCE8E6"><B>Main / DemoPruebas</B></TD></TR>
+      <TR><TD ALIGN="LEFT">+ main(args): void<BR/>+ mostrarMenu(): void<BR/>+ ejecutar casos de prueba</TD></TR>
+    </TABLE>
+  >];
+
+  {rank=same; ProductoPerecedero; ProductoNoPerecedero;}
+  Producto -> ProductoPerecedero [label="hereda", dir=back, arrowtail=empty];
+  Producto -> ProductoNoPerecedero [label="hereda", dir=back, arrowtail=empty];
+  Producto -> Inventario [label="gestiona 1..*", arrowhead=odiamond];
+  Inventario -> Validador [label="usa", style=dashed, arrowhead=vee];
+  Main -> Inventario [label="usa", style=dashed, arrowhead=vee];
+}
